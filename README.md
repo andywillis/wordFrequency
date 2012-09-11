@@ -6,4 +6,4 @@ This experiment analyses the script for Meet Joe Black, written by Bo Goldman.
 
 ## To do
 
-* Add proper command parameters.
+* Add proper command-line parameters.

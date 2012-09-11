@@ -1,7 +1,7 @@
 // Dependancies
 var fs = require( 'fs' )
-	,	core = require( 'core' )
-	,	color = require( 'colors' )
+	, core = require( 'core' )
+	, color = require( 'colors' )
 	;
 
 ;(function main(){
@@ -11,7 +11,7 @@ var fs = require( 'fs' )
 		,	workingData = fs.readFileSync( 'mjb.txt', 'ascii' )
 		,	dataArray
 		,	chartObject
-		,	range = 11
+		,	range = 10
 		;
 
 	core.clear();
@@ -21,7 +21,7 @@ var fs = require( 'fs' )
 			chartObject: chartObject
 		,	sort: 'asc'
 			// 12 = box, 17 = solid reverse button
-		,	chartType: String.fromCharCode(16)
+		,	chartType: String.fromCharCode(2)
 		,	barColors: [ 'red', 'green', 'white', 'yellow', 'cyan' ]
 	})
 
@@ -193,7 +193,7 @@ function createConsoleChart( parameters ) {
 		,	sum = chartObject.sum()
 		,	labelLengths = labels.map( function( label ) { return label.length; } )
 		,	maxLabelSize = Math.max.apply( null, labelLengths )
-		, fill = function( str, num ) { var padding = new Array( num ).join( str ); return padding;	}
+		,	fill = function( str, num ) { var padding = new Array( num ).join( str ); return padding;	}
 		,	header = '{columnOne}{columnTwo}{columnThree}'
 		;
 
@@ -205,6 +205,7 @@ function createConsoleChart( parameters ) {
 	console.log(header);
 
 	for ( label in labels ) {
+
 		var thisLabel = labels[ label ]
 			,	thisLabelLen = thisLabel.length
 			,	diff = maxLabelSize - thisLabelLen
@@ -237,3 +238,5 @@ function listChars(){
 		if (i !== 155) console.log(i + ': ' + String.fromCharCode(i));
 	}	
 }
+
+//listChars()
