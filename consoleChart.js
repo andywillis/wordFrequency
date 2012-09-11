@@ -6,12 +6,12 @@ var fs = require( 'fs' )
 
 ;(function main(){
 	
-	var commonWords = fs.readFileSync( 'words.txt', 'ascii' )
+	var commonWords = fs.readFileSync( 'commonWords.txt', 'ascii' )
 		,	exceptions = ['parrish','allison','quince','susan'].sort().join( '|' )
 		,	workingData = fs.readFileSync( 'mjb.txt', 'ascii' )
 		,	dataArray
 		,	chartObject
-		,	range = 10
+		,	range = 11
 		;
 
 	core.clear();
@@ -19,9 +19,9 @@ var fs = require( 'fs' )
 	chartObject = createChartObject( dataArray );
 	createConsoleChart({
 			chartObject: chartObject
-//		,	sort: 'asc'
+		,	sort: 'asc'
 			// 12 = box, 17 = solid reverse button
-		,	chartType: String.fromCharCode(12)
+		,	chartType: String.fromCharCode(16)
 		,	barColors: [ 'red', 'green', 'white', 'yellow', 'cyan' ]
 	})
 
@@ -217,7 +217,7 @@ function createConsoleChart( parameters ) {
 		barColor = ( barColor === barColors.length - 1 ) ? 0 : barColor + 1
 		data = fill( chartType, values[ label ] )[ barColors[ barColor ] ]
 		percentageValue = Math.round((values[ label ] / sum * 100) * 10 ) / 10
-		percentageString = (fill( ' ', 7 - ( percentageValue.toString().length )) + percentageValue + '% ' )[ textColor ]
+		percentageString = (fill( ' ', 6 - ( percentageValue.toString().length )) + percentageValue + '% ' )[ textColor ]
 
 		row = row
 			.replace( '{outLabels}', outLabels[ textColor ] )
@@ -225,8 +225,15 @@ function createConsoleChart( parameters ) {
 			.replace( '{percentage}', percentageString )
 
 		console.log( row );
-//		console.log(1/sum*100|0);
 
 	}
 
+	console.log(header);
+
 };
+
+function listChars(){
+	for ( var i = 0, l = 256; i < l; i++ ) {
+		if (i !== 155) console.log(i + ': ' + String.fromCharCode(i));
+	}	
+}
