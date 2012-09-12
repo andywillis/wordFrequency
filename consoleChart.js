@@ -1,7 +1,7 @@
 // Dependancies
 var fs = require( 'fs' )
-	, core = require( 'core' )
-	, color = require( 'colors' )
+  , core = require( 'core' )
+  , color = require( 'colors' )
 	;
 
 ;(function main(){
@@ -11,7 +11,7 @@ var fs = require( 'fs' )
 		,	workingData = fs.readFileSync( 'mjb.txt', 'ascii' )
 		,	dataArray
 		,	chartObject
-		,	range = 10
+		,	range = 11
 		;
 
 	core.clear();
@@ -21,7 +21,7 @@ var fs = require( 'fs' )
 			chartObject: chartObject
 		,	sort: 'asc'
 			// 12 = box, 17 = solid reverse button
-		,	chartType: String.fromCharCode(2)
+		,	chartType: '\u2592' //String.fromCharCode(17) //'\u2601'
 		,	barColors: [ 'red', 'green', 'white', 'yellow', 'cyan' ]
 	})
 
@@ -200,9 +200,10 @@ function createConsoleChart( parameters ) {
 	header = header
 		.replace( '{columnOne}', fill( ' ', maxLabelSize - 'WORD'.length + 4) + 'WORD' )
 		.replace( '{columnTwo}', fill( ' ', 4 - '%'.length + 3) + '%' )
-		.replace( '{columnThree}', fill( ' ', 7 - 'VALUE'.length + 3) + 'VALUE' )
+		.replace( '{columnThree}', fill( ' ', 11 - 'INSTANCES'.length + 3) + 'INSTANCES' )
 
 	console.log(header);
+	console.log(fill('-', 70));
 
 	for ( label in labels ) {
 
@@ -211,7 +212,7 @@ function createConsoleChart( parameters ) {
 			,	diff = maxLabelSize - thisLabelLen
 			, paddingRequired = ( diff === 0 ) ? false : true
 			,	outLabels = ''
-			,	row = '{outLabels} {percentage} {data}'
+			,	row = '{outLabels} {percentage}  {data}'
 			;
 
 		outLabels = ( paddingRequired ) ? fill( ' ', diff + 1 ) + '   ' + thisLabel : '   ' + thisLabel;
@@ -229,6 +230,7 @@ function createConsoleChart( parameters ) {
 
 	}
 
+	console.log(fill('-', 70));
 	console.log(header);
 
 };
