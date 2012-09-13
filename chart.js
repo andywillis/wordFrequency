@@ -8,10 +8,11 @@ var fs = require( 'fs' )
 	
 	var commonWords = fs.readFileSync( 'commonWords.txt', 'ascii' )
 		,	exceptions = ['parrish','allison','quince','susan'].sort().join( '|' )
+//		,	exceptions = ['favorites','comments','posted'].sort().join( '|' )
 		,	workingData = fs.readFileSync( 'mjb.txt', 'ascii' )
 		,	dataArray
 		,	chartObject
-		,	range = 11
+		,	range = 10
 		;
 
 	core.clear();
@@ -20,8 +21,6 @@ var fs = require( 'fs' )
 	createConsoleChart({
 			chartObject: chartObject
 		,	sort: 'asc'
-			// 12 = box, 17 = solid reverse button
-		,	chartType: '\u2592' //String.fromCharCode(17) //'\u2601'
 		,	barColors: [ 'red', 'green', 'white', 'yellow', 'cyan' ]
 	})
 
@@ -36,25 +35,31 @@ var fs = require( 'fs' )
 function processWorkingData( commonWords, exceptions, workingData, range ) {
 
 	var dataArray
-		,	rePunctuation = /[\n\t.,:<>!£$%^&*\(\)\-\=\+\[\];@#\?\|0-9]/g
-		,	reCommon = new RegExp( '\\b(?:'+ getCommon( commonWords ) + ')\\b', 'gi' )
-		,	reExceptions = new RegExp( '\\b(?:'+ exceptions + ')\\b', 'gi' )
-		,	reRange = new RegExp( '\\b[a-z]{1,' + range + '}\\b', 'gi' )
+		,	reNotAllowedChar = /[^a-zA-Z ]/gim
+		,	reNotAllowedWord = /january|february|march|april|may|june|july|august|september|october|november|december/gim
+		, reContraction = /\b[a-z]*['’][a-z]*\b/gim
+		,	spaceFill = /\s{1,}/gim
+		,	reCommon = new RegExp( '\\b(?:'+ getCommon( commonWords ) + ')\\b', 'gim' )
+		,	reExceptions = new RegExp( '\\b(?:'+ exceptions + ')\\b', 'gim' )
+		,	reRange = new RegExp( '\\b[a-z]{1,' + range + '}\\b', 'gim' )
 		;
 		
-	return dataArray = workingData
+	 return dataArray = workingData
 			.toLowerCase()
-			.replace( rePunctuation, ' ' )
-			.replace( /[\/"']/g, ' ' )
-			.replace( /\r/g, ' ' )
+			.replace( reContraction, '')
 			.replace( reCommon, '' )
+			.replace( reNotAllowedChar, ' ' )
+			.replace( reNotAllowedWord, '' )
+
 			.replace( reExceptions, '' )
 			.replace( reRange, '' )
-			.replace( /(?:\s{2,})/g, ' ' )
+			.replace( spaceFill, ' ' )
 			.trim()
 			.split( ' ' )
 			.sort()
 			;
+
+	console.log(dataArray);
 
 };
 
@@ -146,22 +151,29 @@ function createChartObject( dataArray ) {
 	}
 
 	ChartObject.prototype.sortValues = function( direction ) {
-		var sortable = []
+		var self = this
+			,	sortable = []
 			,	temp = {}
 			,	data = this.data
 			,	direction = direction || 'asc'
+			, reset = function(){ self.data = {}; }
+			,	fn = {
+					asc: function( arr ) {return arr.sort( function(a, b) { return a[ 1 ] - b[ 1 ] } )}
+				,	desc: function( arr ) {return arr.sort( function(a, b) { return b[ 1 ] - a[ 1 ] } )}
+				}
 			;
 
-		for ( key in data ) {	sortable.push( [ key, data[ key ] ] ) }
-		if (direction === 'asc' ) {
-			sortable.sort( function(a, b) { return a[ 1 ] - b[ 1 ] } )
-		} else {
-			sortable.sort( function(a, b) { return b[ 1 ] - a[ 1 ] } )
-		}
-		this.data = {};
+		for ( key in data ) {	
+			sortable.push( [ key, data[ key ] ] ) 
+		};
+
+		sortable = fn[ direction ]( sortable )
+		reset();
+
 		for ( element in sortable ) {
-			this.data[sortable[element][0]] = sortable[element][1]
-		}
+			var thisEl = sortable[element]
+			this.data[thisEl[0]] = thisEl[1]
+		};
 
 		return this;
 	}
@@ -186,7 +198,7 @@ function createConsoleChart( parameters ) {
 	var index = 0
 		,	textColor = 'grey'
 		,	barColor = 0
-		,	chartType = parameters.chartType || '|'
+		,	chartType = '\u2592'
 		,	barColors = parameters.barColors || [ 'white' ]
 		,	labels = Object.keys( chartObject.data )
 		,	values = chartObject.values()
@@ -235,10 +247,14 @@ function createConsoleChart( parameters ) {
 
 };
 
+/*
+
 function listChars(){
 	for ( var i = 0, l = 256; i < l; i++ ) {
 		if (i !== 155) console.log(i + ': ' + String.fromCharCode(i));
 	}	
 }
 
-//listChars()
+listChars()
+
+*/
