@@ -1,4 +1,4 @@
-# Word Frequence Console Charting
+# Word Frequency Console Charting
 
 An experiment to build (word frequency) bar charts in the console.
 
