@@ -7,6 +7,8 @@ var fs = require( 'fs' )
 	;
 
 /**
+ * @name main
+ * @description Runs the program if no parameter errors.
  * @param {array} args User created command-line args.
  * @author Andy Willis
  */
@@ -26,6 +28,8 @@ var fs = require( 'fs' )
 }( args ));
 
 /**
+ * @name createChartObject
+ * @description Creates a new chart object
  * @param {object} config The chart config
  * @return {object} chartObject An object containing:
  * 		Functions: init, values, sum, sortValues, render
@@ -41,6 +45,9 @@ function createChartObject( config ) {
 }
 
 /**
+ * @name createConfig
+ * @description Creates a new config object based on a template
+ * and error-checks it against the submitted parameters.
  * @param {array} arguments An array of command-line arguments
  * @return {object} config The chart config
  * @author Andy Willis
