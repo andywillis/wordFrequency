@@ -30,8 +30,8 @@ l (define minimum value) integer
 
 ### One
 
-`node chart s:none c:common.txt i:mjb.txt e:mjb_exceptions.txt r:10 b:rainbow p:yes l:0`
+`node chart s:none c:input/common.txt i:input/mjb.txt e:input/mjb_exceptions.txt r:10 b:rainbow p:yes l:0`
 
 ### Two
 
-`node chart s:asc c:common.txt i:mjb.txt e:mjb_exceptions.txt r:5 b:red,white,blue p:yes l:3`
+`node chart s:asc c:input/common.txt i:input/mjb.txt e:input/mjb_exceptions.txt r:5 b:red,white,blue p:yes l:3`
