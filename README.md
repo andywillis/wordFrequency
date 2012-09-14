@@ -26,6 +26,12 @@ p (run stemmer) yes | no
 
 l (define minimum value) integer
 
-example one `node chart s:none c:common.txt i:mjb.txt e:mjb_exceptions.txt r:10 b:rainbow p:yes l:0`
+## Examples
 
-example two `node chart s:asc c:common.txt i:mjb.txt e:mjb_exceptions.txt r:5 b:red,white,blue p:yes l:3`
+### One
+
+`node chart s:none c:common.txt i:mjb.txt e:mjb_exceptions.txt r:10 b:rainbow p:yes l:0`
+
+### Two
+
+`node chart s:asc c:common.txt i:mjb.txt e:mjb_exceptions.txt r:5 b:red,white,blue p:yes l:3`
