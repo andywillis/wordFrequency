@@ -3,7 +3,7 @@ var fs = require( 'fs' )
   , core = require( 'core' )
   , color = require( 'colors' )
   , args = process.argv.slice(2)
-  ,	proto = require('./proto')
+  ,	proto = require('./lib/proto')
 	;
 
 /**
@@ -13,8 +13,8 @@ var fs = require( 'fs' )
 
 ;(function main( args ){
 
-	core.clear();
 	createConfig( args, function(err, config) {
+		core.clear();
 		if (err) {
 			console.log(err)
 		} else {
@@ -47,8 +47,8 @@ function createChartObject( config ) {
  */
 
 function createConfig( args, callback ) {
-	var reArg = /([a-z])\:([a-zA-Z0-9_.]*)/i
-		,	fromTemplate = function() { return { s: null, c: null, i: null,	e: null, r: null,	p: null } }
+	var reArg = /([a-z])\:([a-zA-Z0-9_.\/]*)/i
+		,	fromTemplate = function() { return { s: null, c: null, i: null,	e: null, r: null,	b: null, p: null, l: null } }
 		,	config = fromTemplate()
 		,	keys = Object.keys( config )
 		;
@@ -80,7 +80,7 @@ function createConfig( args, callback ) {
 				,	'input file': ['i', 'path']
 				,	'exception list': ['e', 'path']
 				,	'range': ['r', 'number']
-				,	'palette': ['p', '[grey|cyan|grey|green|grey|cyan|yellow|blue|red] | rainbow']
+				,	'bar colour': ['b', '[grey|cyan|grey|green|grey|cyan|yellow|blue|red] | rainbow']
 			}
 
 			err += '\tAdd required parameters in the format ' + '[label]'.green + ':' + '[parameters]'.yellow + '\n\n'

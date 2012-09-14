@@ -20,8 +20,12 @@ e (exceptions file) path
 
 r (range - minimum number of characters) integer
 
-p (palette) a comination of grey|cyan|grey|green|grey|cyan|yellow|blue|red, or rainbow
+b (bar colour) a comination of grey|cyan|grey|green|grey|cyan|yellow|blue|red, or rainbow
 
-example one `node chart s:none c:common.txt i:mjb.txt e:mjb_exceptions.txt r:10 p:rainbow`
+p (run stemmer) yes | no
 
-example two `node chart s:asc c:common.txt i:mjb.txt e:mjb_exceptions.txt r:5 p:red,white,blue`
+l (define minimum value) integer
+
+example one `node chart s:none c:common.txt i:mjb.txt e:mjb_exceptions.txt r:10 b:rainbow p:yes l:0`
+
+example two `node chart s:asc c:common.txt i:mjb.txt e:mjb_exceptions.txt r:5 b:red,white,blue p:yes l:3`
