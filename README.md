@@ -10,21 +10,21 @@ Either run the `run.bat` batch file, or run `node chart` with the following para
 
 [single-letter label] [colon] [parameter(s)]
 
-s (sort-type) asc | desc | none
+**s** (sort-type) asc | desc | none
 
-c (common words list) path
+**c** (common words list) path
 
-i (input file) path
+**i** (input file) path
 
-e (exceptions file) path
+**e** (exceptions file) path
 
-r (range - minimum number of characters) integer
+**r** (range - minimum number of characters) integer
 
-b (bar colour) a comination of grey|cyan|grey|green|grey|cyan|yellow|blue|red, or rainbow
+**b** (bar colour) a comination of grey|cyan|grey|green|grey|cyan|yellow|blue|red, or rainbow
 
-p (run stemmer) yes | no
+**p** (run stemmer) yes | no
 
-l (define minimum value) integer
+**l** (define minimum value) integer
 
 ## Examples
 
