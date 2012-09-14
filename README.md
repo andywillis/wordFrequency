@@ -30,7 +30,9 @@ Either run the `run.bat` batch file, or run `node chart` with the following para
 
 ### One
 
-`node chart s:none c:input/common.txt i:input/mjb.txt e:input/mjb_exceptions.txt r:10 b:rainbow p:yes l:0`
+`node chart s:asc c:input/common.txt i:input/mjb.txt e:input/mjb_exceptions.txt r:12 b:rainbow p:yes l:1`
+
+![chart1](http://dl.dropbox.com/u/80737100/chart1.png)
 
 ### Two
 
