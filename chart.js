@@ -3,8 +3,8 @@ var fs = require( 'fs' )
   , core = require( 'core' )
   , color = require( 'colors' )
   , args = process.argv.slice(2)
-  ,	proto = require('./lib/proto')
-	;
+  , proto = require('./lib/proto')
+  ;
 
 /**
  * @name main
@@ -15,15 +15,15 @@ var fs = require( 'fs' )
 
 ;(function main( args ){
 
-	createConfig( args, function(err, config) {
-		core.clear();
-		if (err) {
-			console.log(err)
-		} else {
-			var chart = createChartObject( config );
-			chart.render( config );
-		}
-	});
+  createConfig( args, function(err, config) {
+    core.clear();
+    if (err) {
+      console.log(err)
+    } else {
+      var chart = createChartObject( config );
+      chart.render( config );
+    }
+  });
 
 }( args ));
 
@@ -32,16 +32,16 @@ var fs = require( 'fs' )
  * @description Creates a new chart object
  * @param {object} config The chart config
  * @return {object} chartObject An object containing:
- * 		Functions: init, values, sum, sortValues, render
- * 		Data: processed word frequency data
+ *     Functions: init, values, sum, sortValues, render
+ *     Data: processed word frequency data
  * @author Andy Willis
  */
 
 function createChartObject( config ) {
-	var chart = {};
-	core.merge(chart, proto)
-	chart.init( config )
-	return chart;
+  var chart = {};
+  core.merge(chart, proto)
+  chart.init( config )
+  return chart;
 }
 
 /**
@@ -54,50 +54,50 @@ function createChartObject( config ) {
  */
 
 function createConfig( args, callback ) {
-	var reArg = /([a-z])\:([a-zA-Z0-9_.\/,]*)/i
-		,	fromTemplate = function() { return { s: null, c: null, i: null,	e: null, r: null,	b: null, p: null, l: null } }
-		,	config = fromTemplate()
-		,	keys = Object.keys( config )
-		;
+  var reArg = /([a-z])\:([a-zA-Z0-9_.\/,]*)/i
+    ,  fromTemplate = function() { return { s: null, c: null, i: null,  e: null, r: null,  b: null, p: null, l: null } }
+    ,  config = fromTemplate()
+    ,  keys = Object.keys( config )
+    ;
 
-	for ( arg in args ) {
-		var thisArg = args[ arg ]
-			,	match = thisArg.match( reArg )
-			,	key = match[ 1 ]
-			,	value = match[ 2 ]
-			;
-		if ( config.hasOwnProperty( key ) ) {
-				config[ key ] = value;
-		}
-	}
+  for ( arg in args ) {
+    var thisArg = args[ arg ]
+      ,  match = thisArg.match( reArg )
+      ,  key = match[ 1 ]
+      ,  value = match[ 2 ]
+      ;
+    if ( config.hasOwnProperty( key ) ) {
+        config[ key ] = value;
+    }
+  }
 
-	try {
-		for ( key in keys ) {
-			var thisKey = keys[ key ]
-			if ( config[thisKey] === null ) throw new Error( 'Missing parameter: ' + thisKey )
-		}
-		callback(null, config)
-	} catch( err ) {
+  try {
+    for ( key in keys ) {
+      var thisKey = keys[ key ]
+      if ( config[thisKey] === null ) throw new Error( 'Missing parameter: ' + thisKey )
+    }
+    callback(null, config)
+  } catch( err ) {
 
-		var errp = err, err = ''
+    var errp = err, err = ''
 
-			var errArr = {
-					'sort': ['s', 'asc | desc | none']
-				,	'common word list': ['c', 'path']
-				,	'input file': ['i', 'path']
-				,	'exception list': ['e', 'path']
-				,	'range': ['r', 'number']
-				,	'bar colour': ['b', '[grey|cyan|grey|green|grey|cyan|yellow|blue|red] | rainbow']
-			}
+      var errArr = {
+          'sort': ['s', 'asc | desc | none']
+        , 'common word list': ['c', 'path']
+        , 'input file': ['i', 'path']
+        , 'exception list': ['e', 'path']
+        , 'range': ['r', 'number']
+        , 'bar colour': ['b', '[grey|cyan|grey|green|grey|cyan|yellow|blue|red] | rainbow']
+      }
 
-			err += '\tAdd required parameters in the format ' + '[label]'.green + ':' + '[parameters]'.yellow + '\n\n'
+      err += '\tAdd required parameters in the format ' + '[label]'.green + ':' + '[parameters]'.yellow + '\n\n'
 
-			for (row in errArr) {
-				err += ( '\t\t' + row.toUpperCase().grey + '\n\t\t' + errArr[row][0].green  + ' ' + errArr[row][1].yellow + '\n\n');
-			}
+      for (row in errArr) {
+        err += ( '\t\t' + row.toUpperCase().grey + '\n\t\t' + errArr[row][0].green  + ' ' + errArr[row][1].yellow + '\n\n');
+      }
 
-			err += ('\n\t' + errp).red
-			callback( err, config )
-	}
+      err += ('\n\t' + errp).red
+      callback( err, config )
+  }
 
 }
