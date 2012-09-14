@@ -47,7 +47,7 @@ function createChartObject( config ) {
  */
 
 function createConfig( args, callback ) {
-	var reArg = /([a-z])\:([a-zA-Z0-9_.\/]*)/i
+	var reArg = /([a-z])\:([a-zA-Z0-9_.\/,]*)/i
 		,	fromTemplate = function() { return { s: null, c: null, i: null,	e: null, r: null,	b: null, p: null, l: null } }
 		,	config = fromTemplate()
 		,	keys = Object.keys( config )
