@@ -1,6 +1,6 @@
 // Dependancies
 var fs = require( 'fs' )
-  , core = require( 'core' )
+  , core = require( './lib/core' )
   , color = require( 'colors' )
   , args = process.argv.slice(2)
   , proto = require('./lib/proto')
