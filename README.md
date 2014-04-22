@@ -32,13 +32,13 @@ Either run the `run.bat` batch file, or run `node chart` with the following para
 
 `node chart s:asc c:input/common.txt i:input/mjb.txt e:input/mjb_exceptions.txt r:12 b:rainbow p:yes l:1`
 
-![chart1](http://dl.dropbox.com/u/80737100/chart1.png)
+![chart1](https://raw.githubusercontent.com/andywillis/wordFrequency/master/docs/1.PNG)
 
 ### Two
 
 `node chart s:asc c:input/common.txt i:input/mjb.txt e:input/mjb_exceptions.txt r:9 b:white,green p:no l:4`
 
-![chart1](http://dl.dropbox.com/u/80737100/chart2.png)
+![chart1](https://raw.githubusercontent.com/andywillis/wordFrequency/master/docs/2.PNG)
 
 ## License
 
